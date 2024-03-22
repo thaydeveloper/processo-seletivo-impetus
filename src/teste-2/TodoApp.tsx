@@ -60,7 +60,7 @@ const TodoApp: React.FC = () => {
           type="submit"
           variant="contained"
           color="primary"
-          style={{ marginTop: "1rem" }}
+          style={{ marginTop: "1.5rem" }}
         >
           Adicionar
         </Button>
