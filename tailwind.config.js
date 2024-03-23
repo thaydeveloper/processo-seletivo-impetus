@@ -12,12 +12,15 @@ module.exports = {
 module.exports = {
   mode: "jit",
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  darkMode: false,
+  darkMode: "media",
   theme: {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      lg: "1024px",
+      xl: "1920px",
+    },
   },
   plugins: [],
 };
