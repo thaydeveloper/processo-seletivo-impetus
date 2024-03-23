@@ -4,7 +4,7 @@
 
 1. Clone este repositório:
    ```bash
-   git clone [https://github.com/thaydeveloper/processo-seletivo-impetus]
+   git clone [git@github.com:thaydeveloper/processo-seletivo-impetus.git]
    
 2. Entre no diretório do projeto:
 
