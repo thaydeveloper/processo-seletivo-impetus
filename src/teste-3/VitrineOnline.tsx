@@ -8,25 +8,23 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import { fetchProdutos } from "../services/api";
+
+import { useAppDispatch, useAppSelector } from "../lib/hooks";
+import { fetchProdutos } from "../lib/slices/produtosSlice";
 
 const VitrineOnline = () => {
-  const [produtos, setProdutos] = useState([]);
+  return <ContentVitrine />;
+};
+
+const ContentVitrine = () => {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const produtosPorPagina = 4;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchProdutos();
-      setProdutos(data);
-    };
-
-    fetchData();
-  }, []);
+  const dispatch = useAppDispatch();
+  const { items, status, error } = useAppSelector((state) => state.produtos);
 
   const indiceUltimoProduto = paginaAtual * produtosPorPagina;
   const indicePrimeiroProduto = indiceUltimoProduto - produtosPorPagina;
-  const produtosPaginaAtual = produtos.slice(
+  const produtosPaginaAtual = items.slice(
     indicePrimeiroProduto,
     indiceUltimoProduto
   );
@@ -38,14 +36,17 @@ const VitrineOnline = () => {
   };
 
   const handleProximaPagina = () => {
-    if (indiceUltimoProduto < produtos.length) {
+    if (indiceUltimoProduto < items.length) {
       setPaginaAtual(paginaAtual + 1);
     }
   };
+  useEffect(() => {
+    dispatch(fetchProdutos());
+  }, [dispatch]);
 
   return (
     <Box
-      key={produtos?.id}
+      key={items?.id}
       sx={{
         width: "100vw",
         maxHeight: "100vh",
@@ -176,7 +177,7 @@ const VitrineOnline = () => {
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded"
           onClick={handleProximaPagina}
-          disabled={indiceUltimoProduto >= produtos.length}
+          disabled={indiceUltimoProduto >= items.length}
         >
           Próxima
         </button>
